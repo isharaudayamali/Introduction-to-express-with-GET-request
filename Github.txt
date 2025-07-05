@@ -1,0 +1,16 @@
+echo "# Introduction-to-express-with-GET-request" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/isharaudayamali/Introduction-to-express-with-GET-request.git
+git push -u origin main
+
+
+
+git remote add origin https://github.com/isharaudayamali/Introduction-to-express-with-GET-request.git
+git branch -M main
+git push -u origin main
+
+
+nodemon app.js
