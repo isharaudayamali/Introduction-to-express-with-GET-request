@@ -14,3 +14,9 @@ git push -u origin main
 
 
 nodemon app.js
+node app.js
+localhost:3000/users
+
+localhost:3000/user/1
+
+
