@@ -15,18 +15,28 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User',userSchema)
 
-module.exports ={
-    // findAll :function() {return users}
-    findAll : () => users,
+module.exports = {
+     findAll : async() => await User.find(),
+     //findAll : async function () {await user.find()} arrow function
 
-    //findById : (id) => users.find(user=> user.id)
-    findById : function(id) {
-        return users.find(user => user.id === id);
-    }
+    findById : async (id) => await user.findById(),
+    //findById : async function (id) {await user.findById} arrow function 
+    
+     newUser: async (userData) => {
+        const user = new User(userData);
+        return await user.save();
+    },
 
-    // newUser : (user) => {
-    //     user.id = user.length+1,
-    //     users.push(user);
-    //     return user;
+    // newUser: async function (userData) {
+    //     const user = newUser (userData);
+    //     return await user.save();
     // }
-} 
+
+    updateUser : async(id, updatedData) => {
+        await User.findByIdAndUpdate(id,updatedData);
+    }
+    //updateUser : async function (id, updatedData) {
+    //     await user.findByIdAndUpdate(id,updatedData);
+    // }
+
+    }

@@ -10,13 +10,16 @@ const mongoose = require('mongoose');
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-mongoose.connect(MONGODB_URI).then(()=>console.log("connection success")).catch(err => console.log("connection failed:", err.errmsg));
+mongoose.connect(MONGODB_URI)
+.then(()=>console.log("MongoDB connection success"))
+.catch(err => console.log("connection failed:", err.errmsg));
 
 app.get('/hello',function(req,res){
     res.send("Welcome");
 })
 
 app.use(express.json());
+
 app.use('/api', userRoute);
 
 app.listen(3000, function() {
