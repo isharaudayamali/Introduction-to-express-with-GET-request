@@ -7,14 +7,13 @@ exports.getAllUsers = async (req, res) => {
 }
 
 exports.getUserById = async (req,res) => {
-    const userId = parseInt(req.params.id);
-    const user =await User.findById(userId);
+    const userId = req.params.id;
+    const user = await User.findById(userId);
     
-
     if(!user){
-        res.status(404).send("User not found");
+        return res.status(404).send("User not found");
     }
-    res.send(user);
+    res.status(200).json(user);
 
 }
 //put
@@ -32,5 +31,33 @@ exports.createNewUser = async (req, res) => {
     } catch (err) {
         console.log("Failed to create User !", err);
         res.status(500).json('Failed to create User !')
+    }
+}
+
+exports.updateUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        
+        const user = await User.updateUser(userId, req.body);
+        if(!user){
+        res.status(404).send("User not found");
+    }
+        res.status(201).json(user)
+    } catch (err) {
+        res.status(500).json('Failed to update User !');
+    }
+}
+
+exports. deleteUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.deleteUser(userId);
+
+        if(!user){
+        res.status(404).json("User not found");
+    }
+        res.json("Deleted Succssful !")
+    } catch (err) {
+        res.status(500).json('Failed to delete User !')
     }
 }

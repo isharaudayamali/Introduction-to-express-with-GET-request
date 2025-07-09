@@ -4,7 +4,6 @@
 //     {id:3, name: "nimal", email:"nimal@gmail.com"}
 // ];
 
-
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -18,8 +17,8 @@ const User = mongoose.model('User',userSchema)
 module.exports = {
      findAll : async() => await User.find(),
      //findAll : async function () {await user.find()} arrow function
-
-    findById : async (id) => await user.findById(),
+     
+    findById : async (id) => await User.findById(id),
     //findById : async function (id) {await user.findById} arrow function 
     
      newUser: async (userData) => {
@@ -33,10 +32,14 @@ module.exports = {
     // }
 
     updateUser : async(id, updatedData) => {
-        await User.findByIdAndUpdate(id,updatedData);
-    }
+       return await User.findByIdAndUpdate(id,updatedData);
+    },
     //updateUser : async function (id, updatedData) {
     //     await user.findByIdAndUpdate(id,updatedData);
     // }
-
+     deleteUser: async (id) => {
+       return await User.findByIdAndDelete(id);
     }
+}
+
+   
