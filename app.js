@@ -3,6 +3,7 @@ const express = require ('express');
 const app = express();
 
 const userRoute = require('./routers/userRouters');
+const productRoute = require('./routers/productRouters ');
 
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ app.get('/hello',function(req,res){
 app.use(express.json());
 
 app.use('/api', userRoute);
+app.use('/api', productRoute);
 
 app.listen(3000, function() {
     console.log("Server is running on 3000");

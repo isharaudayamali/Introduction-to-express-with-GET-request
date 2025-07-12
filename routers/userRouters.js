@@ -12,4 +12,4 @@ router.post('/users', userController.createNewUser);
 
 router.put('/users/:id', userController.updateUser);
 
-router.delete('/users/:id', userController.deleteUser);
+router.delete('/users/:id', userController.deleteUser); 

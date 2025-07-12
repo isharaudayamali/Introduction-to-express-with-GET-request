@@ -37,7 +37,8 @@ module.exports = {
     //updateUser : async function (id, updatedData) {
     //     await user.findByIdAndUpdate(id,updatedData);
     // }
-     deleteUser: async (id) => {
+
+    deleteUser: async (id) => {
        return await User.findByIdAndDelete(id);
     }
 }
