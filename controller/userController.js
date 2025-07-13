@@ -2,9 +2,23 @@ const User = require('./../models/User');
 
 //GET
 exports.getAllUsers = async (req, res) => {
-    const users =await User.findAll();
-    res.send(users);
-}
+    
+            try {
+                const page = parseInt(req.query.page) || 1;
+                const limit = parseInt(req.query.limit) || 10;
+                const sort = req.query.sort || 'name';
+        
+                const result = await User.findWithPagination(page, limit, sort);
+                res.status(200).json({
+                    success: true,
+                    data: result.users,
+                    pagination: result.pagination
+                });
+            } catch (error) {
+                res.status(500).json('Failed to create User !')
+            }
+        }
+
 //GET Find by id
 exports.getUserById = async (req,res) => {
     const userId = req.params.id;

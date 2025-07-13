@@ -3,9 +3,23 @@ const User = require('../models/Product');
 
 //GET
 exports.getAllProducts = async (req, res) => {
-    const products =await Product.findAll();
-    res.send(products);
-}
+
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 10;
+            const sort = req.query.sort || 'name';
+    
+            const result = await Product.findWithPagination(page, limit, sort);
+            res.status(200).json({
+                success: true,
+                data: result.products,
+                pagination: result.pagination
+            });
+        } catch (error) {
+            res.status(500).json('Failed to create Product !')
+        }
+    }
+
 //GET Find by id
 exports.getProductById = async (req,res) => {
     const productId = req.params.id;

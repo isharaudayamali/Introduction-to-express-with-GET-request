@@ -30,7 +30,30 @@ module.exports = {
 
     deleteProduct: async (id) => {
        return await Product.findByIdAndDelete(id);
+    },
+    
+    findWithPagination: async (page = 1, limit = 10, sort = 'name') => {
+        const skip = (page - 1) * limit;
+
+        const products = await Product.find()
+            .sort(sort)
+            .skip(skip)
+            .limit(parseInt(limit))
+
+        const total = await Product.countDocuments();
+        const totalPages = Math.ceil(total/limit);
+
+        return {
+            products,
+            pagination: {
+                currentPage: parseInt(page),
+                totalPages,
+                totalItems: total,
+                itemPerPage: limit
+            }
+        }
     }
 }
+
 
    
