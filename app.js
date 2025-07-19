@@ -21,8 +21,8 @@ app.get('/hello',function(req,res){
 
 app.use(express.json());
 
-app.use('/api', userRoute);
-app.use('/api', productRoute);
+app.use('/api/users', userRoute);
+app.use('/api/products', productRoute);
 
 app.listen(3000, function() {
     console.log("Server is running on 3000");
